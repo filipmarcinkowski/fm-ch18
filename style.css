@@ -107,20 +107,20 @@ body {
   margin-bottom: 2rem;
 }
 
+.input-box {
+  position: relative;
+}
+
 .cta-input {
   height: 6rem;
   border-radius: var(--r-s);
   border: solid 0.1rem var(--clr-neutral-300);
-
   text-indent: 3rem;
-
   font-size: 1.6rem;
 
   font-weight: 500;
   caret-color: black;
-}
-
-.cta-input::after {
+  width: 100%;
 }
 
 button {
@@ -141,12 +141,34 @@ button:hover {
   background-color: var(--clr-secondary-500);
 }
 
-.cta-form p {
+.form__btn-desc {
   font-size: 1.1rem;
   color: inherit;
   text-align: center;
 }
 
 .cta-form p strong {
+  color: var(--clr-primary);
+}
+
+/* Error msg ////////////////////////*/
+
+.error {
+  color: var(--clr-primary);
+  border: solid 0.2rem var(--clr-primary);
+}
+
+.input__error-icon {
+  position: absolute;
+  top: 3rem;
+  right: 5%;
+  transform: translate(-50%, -50%);
+}
+
+.input__error-msg {
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 100%;
+  font-size: 1.2rem;
   color: var(--clr-primary);
 }
