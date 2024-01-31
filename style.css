@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
+
+:root {
+  --clr-primary: hsl(0, 100%, 74%);
+  --clr-secondary: hsl(154, 59%, 51%);
+  --clr-secondary-500: hsl(154, 80%, 70%);
+  --clr-accent: hsl(248, 32%, 49%);
+
+  --clr-neutral-800: hsl(249, 10%, 26%);
+  --clr-neutral-300: hsl(246, 25%, 77%);
+  --clr-neutral-00: hsl(0, 0%, 100%);
+
+  /* SHADOWS */
+  --clr-neutral-s: hsla(249, 10%, 26%, 0.474);
+
+  --shadow: 0 0.6rem 0.5rem 0 var(--clr-neutral-s);
+
+  /* RADIUS */
+
+  --r-s: 0.5rem;
+  --r-m: 1rem;
+  --r-b: 2rem;
+}
+
+.main-container {
+  max-width: 144rem;
+  background: var(--clr-primary);
+}
+
+.grid {
+  /* border: solid 0.2rem red; */
+
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin: 12rem 16rem;
+}
+
+/* HEADING PART - LEFT ////////////////////////// */
+
+.heading-part {
+  color: var(--clr-neutral-00);
+}
+
+.heading__heading {
+  font-size: 5rem;
+  line-height: 1.1;
+  margin-bottom: 3.6rem;
+}
+
+.heading__desc {
+}
+
+/* FORM PART - RIGHT ////////////////////////////// */
+
+.form-part {
+  /* max-width: 40rem; */
+}
+
+/* baner */
+
+.baner-box {
+  color: var(--clr-neutral-00);
+  background-color: var(--clr-accent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6rem;
+  width: 100%;
+  border-radius: var(--r-m);
+
+  margin-bottom: 2rem;
+
+  box-shadow: var(--shadow);
+}
+
+/* form */
+
+.cta-form {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  background-color: var(--clr-neutral-00);
+  border-radius: var(--r-m);
+  box-shadow: var(--shadow);
+}
+
+.cta-form > * {
+  margin-bottom: 2rem;
+}
+
+.cta-input {
+  height: 6rem;
+  border-radius: var(--r-s);
+  border: solid 0.1rem var(--clr-neutral-300);
+
+  text-indent: 3rem;
+
+  font-size: 1.6rem;
+
+  font-weight: 500;
+  caret-color: black;
+}
+
+.cta-input::after {
+}
+
+button {
+  background-color: var(--clr-secondary);
+  border: none;
+  color: var(--clr-neutral-00);
+  text-transform: uppercase;
+  font-weight: 500;
+  height: 6rem;
+  border-radius: var(--r-s);
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+  box-shadow: var(--shadow);
+}
+
+button:hover {
+  background-color: var(--clr-secondary-500);
+}
+
+.cta-form p {
+  font-size: 1.1rem;
+  color: inherit;
+  text-align: center;
+}
+
+.cta-form p strong {
+  color: var(--clr-primary);
+}
