@@ -118,12 +118,12 @@ body {
   text-indent: 3rem;
   font-size: 1.6rem;
 
-  font-weight: 500;
+  font-weight: 600;
   caret-color: black;
   width: 100%;
 }
 
-button {
+.btn {
   background-color: var(--clr-secondary);
   border: none;
   color: var(--clr-neutral-00);
@@ -137,7 +137,7 @@ button {
   box-shadow: var(--shadow);
 }
 
-button:hover {
+.btn:hover {
   background-color: var(--clr-secondary-500);
 }
 
@@ -153,7 +153,8 @@ button:hover {
 
 /* Error msg ////////////////////////*/
 
-.error {
+.error,
+.error-email {
   color: var(--clr-primary);
   border: solid 0.2rem var(--clr-primary);
 }
@@ -172,3 +173,11 @@ button:hover {
   font-size: 1.2rem;
   color: var(--clr-primary);
 }
+
+.hide {
+  display: none;
+}
+
+/* .warning {
+  display: none;
+} */
