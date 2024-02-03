@@ -1,22 +1,18 @@
 'use strict';
 
-const inputBox = document.querySelectorAll('.input-box');
-const inputEmail = document.querySelector('.form__email');
-const btn = document.querySelector('.btn');
-
-const warningIcon = `<img src="./images/icon-error.svg" class="input__error-icon warning" alt="error icon"/>`;
+const warningIcon = `<img src="./images/icon-error.svg" class="input__error-icon warning-icon" alt="error icon"/>`;
 const emptyInputMsg = `${warningIcon} <p class="input__error-msg warning"> (...) cannot be empty</p>`;
 const emptyEmailMsg = `${warningIcon} <p class="input__error-msg warning-email" > Looks like this is not an email</p> `;
 
 // //////////////////////////////////////////////////////////
-const warningMsg = document.createElement('p');
-const emailWarningMsg = document.createElement('p');
+// const warningMsg = document.createElement('p');
+// const emailWarningMsg = document.createElement('p');
 
-warningMsg.classList.add('input__error-msg', 'warning');
-emailWarningMsg.classList.add('input__error-msg', 'warning');
+// warningMsg.classList.add('input__error-msg', 'warning');
+// emailWarningMsg.classList.add('input__error-msg', 'warning');
 
-warningMsg.innerHTML = `(...) cannot be empty`;
-emailWarningMsg.innerHTML = `Looks like this is not an email`;
+// warningMsg.innerHTML = `(...) cannot be empty`;
+// emailWarningMsg.innerHTML = `Looks like this is not an email`;
 
 // ////////////////////////////////////////////////////////////////////////
 
@@ -99,34 +95,76 @@ emailWarningMsg.innerHTML = `Looks like this is not an email`;
 // });
 
 // /////////////////////////////////////////////////////////////////////////////////
+const btn = document.querySelector('.btn');
+const inputEmail = document.querySelector('.form__email');
+
+const inputBox = document.querySelectorAll('.input-box');
 
 const checkData = function (e) {
   e.preventDefault();
-  // console.log('hello');
   inputBox.forEach(checkInput);
 };
 
 const checkInput = function (field) {
-  console.log('hello - 2');
-
   // selected input fields
-
+  const inputEmail = field.querySelector('.form__email');
   const inputField = field.querySelector('.cta-input');
+  const msgClr = inputField.classList.contains('error');
+  // const emailClr = inputEmail.classList.contains('error-email');
   const isEmpty = inputField.value;
 
-  if (isEmpty === '') {
-    console.log('hello-3');
+  // jeśli pole jest puste //////////////////////
 
+  if (isEmpty === '' && !msgClr) {
     addError(field);
-    // field.appendChild(warningMsg);
   } else if (isEmpty !== '') {
-    // const warning = field.querySelector('.input__error-msg');
-    // warning.remove();
+    const removeEl = function (e) {
+      if (e !== inputField) {
+        e.remove();
+        inputField.classList.remove('error');
+      }
+    };
+
+    [...inputField.parentElement.children].forEach(removeEl);
   }
 };
 
 const confirmData = btn.addEventListener('click', checkData);
 
 const addError = function (el) {
-  el.insertAdjacentHTML('afterend', emptyInputMsg);
+  el.insertAdjacentHTML('beforeend', emptyInputMsg);
+  const inputField = el.querySelector('.cta-input');
+  inputField.classList.add('error');
+};
+
+const addEmailError = function (el) {
+  inputEmail.insertAdjacentHTML('afterend', emptyEmailMsg);
+  const inputEmail = el.querySelector('.form__email');
+  inputEmail.classList.add('error-email');
+};
+
+const checkAdress = function (el) {
+  const email = inputEmail.value;
+  const a = email.slice(0, email.indexOf('@')).length;
+  const b = email.slice(email.indexOf('@'), email.indexOf('.')).length;
+  const c = email.slice(email.indexOf('.'), email.length).length;
+
+  const correctEmail = a >= 1 && b >= 3 && c >= 3;
+
+  console.log(`a=${a}, b=${b}, c=${c}`);
+
+  if (
+    // jeśli email nie zawiera '@' ani '.' i
+    (!email.includes('@', '.') && !emailClr) ||
+    (!correctEmail && !emailClr)
+  ) {
+    addEmailError();
+  } else if (correctEmail === true) {
+    [...inputEmail.parentElement.children].forEach(function (e) {
+      if (el !== inputEmail) {
+        el.remove();
+        inputEmail.classList.remove('error-email');
+      }
+    });
+  }
 };
