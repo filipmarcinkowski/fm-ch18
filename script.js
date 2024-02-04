@@ -99,6 +99,7 @@ const btn = document.querySelector('.btn');
 const inputEmail = document.querySelector('.form__email');
 
 const inputBox = document.querySelectorAll('.input-box');
+const emailClr = inputEmail.classList.contains('error-email');
 
 const checkData = function (e) {
   e.preventDefault();
@@ -107,29 +108,46 @@ const checkData = function (e) {
 
 const checkInput = function (field) {
   // selected input fields
-  const inputEmail = field.querySelector('.form__email');
   const inputField = field.querySelector('.cta-input');
-  const msgClr = inputField.classList.contains('error');
-  // const emailClr = inputEmail.classList.contains('error-email');
-  const isEmpty = inputField.value;
 
+  const msgClr = inputField.classList.contains('error');
+  const isEmpty = inputField.value;
+  const isEmail = inputEmail.value;
+
+  // ///////////////////////////////////////////
+
+  const removeEl = function (e) {
+    if (e !== inputField) {
+      e.remove();
+      inputField.classList.remove('error');
+      // czy to to????????????
+      inputField.classList.remove('error-email');
+    }
+  };
   // jeśli pole jest puste //////////////////////
 
   if (isEmpty === '' && !msgClr) {
+    // isEmail === '' && !emailClr;
+    addError(field);
+
+    // pole nie jest puste
+  } else if (isEmpty === '' && inputField.classList.contains('error-email')) {
+    [...inputEmail.parentElement.children].forEach(function (e) {
+      if (e !== inputEmail) {
+        e.remove();
+        inputEmail.classList.remove('error');
+        inputEmail.classList.remove('error-email');
+      }
+    });
     addError(field);
   } else if (isEmpty !== '') {
-    const removeEl = function (e) {
-      if (e !== inputField) {
-        e.remove();
-        inputField.classList.remove('error');
-      }
-    };
-
+    // usuń error msg i class='error'
     [...inputField.parentElement.children].forEach(removeEl);
+    checkAdress();
   }
 };
 
-const confirmData = btn.addEventListener('click', checkData);
+// //////////////////////////////////////////////
 
 const addError = function (el) {
   el.insertAdjacentHTML('beforeend', emptyInputMsg);
@@ -137,34 +155,38 @@ const addError = function (el) {
   inputField.classList.add('error');
 };
 
-const addEmailError = function (el) {
+const addEmailError = function () {
   inputEmail.insertAdjacentHTML('afterend', emptyEmailMsg);
-  const inputEmail = el.querySelector('.form__email');
   inputEmail.classList.add('error-email');
 };
+// //////////////////////////////////////////////
 
 const checkAdress = function (el) {
   const email = inputEmail.value;
+
   const a = email.slice(0, email.indexOf('@')).length;
   const b = email.slice(email.indexOf('@'), email.indexOf('.')).length;
   const c = email.slice(email.indexOf('.'), email.length).length;
 
-  const correctEmail = a >= 1 && b >= 3 && c >= 3;
+  const correctOrderEmail = a >= 1 && b >= 3 && c >= 3;
+  const correctEmail = email.includes('@', '.') && correctOrderEmail;
 
   console.log(`a=${a}, b=${b}, c=${c}`);
 
-  if (
-    // jeśli email nie zawiera '@' ani '.' i
-    (!email.includes('@', '.') && !emailClr) ||
-    (!correctEmail && !emailClr)
-  ) {
-    addEmailError();
-  } else if (correctEmail === true) {
+  if (correctEmail) {
+    // usuń class ='error' i 'error-email' oraz error msg
     [...inputEmail.parentElement.children].forEach(function (e) {
-      if (el !== inputEmail) {
-        el.remove();
+      if (e !== inputEmail) {
+        e.remove();
+        inputEmail.classList.remove('error');
         inputEmail.classList.remove('error-email');
       }
     });
+    console.log('dobry adress');
+  } else if (!correctEmail && !emailClr) {
+    addEmailError();
+    console.log('zły adress');
   }
 };
+
+const confirmData = btn.addEventListener('click', checkData);
