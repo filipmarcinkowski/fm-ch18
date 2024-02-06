@@ -1,13 +1,26 @@
 'use strict';
 
-const warningIcon = `<img src="./images/icon-error.svg" class="input__error-icon warning-icon" alt="error icon"/>`;
-const emptyInputMsg = `${warningIcon} <p class="input__error-msg warning"> (...) cannot be empty</p>`;
-const emptyEmailMsg = `${warningIcon} <p class="input__error-msg warning-email" > Looks like this is not an email</p> `;
-
 const btn = document.querySelector('.btn');
 const inputEmail = document.querySelector('.form__email');
 const inputBox = document.querySelectorAll('.input-box');
 const emailClr = inputEmail.classList.contains('error-email');
+
+const x = function () {
+  const atributeText = inputBox.forEach(function (field) {
+    const atribute = field
+      .querySelector('.cta-input')
+      .getAttribute('placeholder');
+
+    console.log(atribute);
+  });
+  return atributeText;
+};
+
+x();
+
+const warningIcon = `<img src="./images/icon-error.svg" class="input__error-icon warning-icon" alt="error icon"/>`;
+const emptyEmailMsg = `${warningIcon} <p class="input__error-msg warning-email" > Looks like this is not an email</p> `;
+const emptyInputMsg = `${warningIcon} <p class="input__error-msg warning"> ${x()} cannot be empty</p>`;
 
 const checkData = function (e) {
   e.preventDefault();
@@ -19,7 +32,12 @@ const checkInput = function (field) {
   const inputField = field.querySelector('.cta-input');
   const msgClr = inputField.classList.contains('error');
   const isEmpty = inputField.value;
-  // const isEmail = inputEmail.value;
+
+  const atribute = field
+    .querySelector('.cta-input')
+    .getAttribute('placeholder');
+
+  console.log(atribute);
 
   // ///////////////////////////////////////////
   const removeErrors = function () {
@@ -47,20 +65,6 @@ const checkInput = function (field) {
   }
 };
 
-// //////////////////////////////////////////////
-
-const addError = function (el) {
-  el.insertAdjacentHTML('beforeend', emptyInputMsg);
-  const inputField = el.querySelector('.cta-input');
-  inputField.classList.add('error');
-};
-
-const addEmailError = function () {
-  inputEmail.classList.add('error-email');
-  inputEmail.insertAdjacentHTML('afterend', emptyEmailMsg);
-};
-// //////////////////////////////////////////////
-
 const checkAdress = function (el) {
   const email = inputEmail.value;
 
@@ -83,5 +87,30 @@ const checkAdress = function (el) {
     addEmailError();
   }
 };
+
+// const emptyInputMsg = function () {
+//   const insertHTML = `${warningIcon} <p class="input__error-msg warning"> ${atribute} cannot be empty</p>`;
+//   const atribute = inputBox.forEach(function (el) {
+//     console.log(el);
+//     const x = el.querySelector('.cta-input').getAttribute('placeholder');
+//     console.log(x);
+//   });
+//   el.insertAdjacentHTML('beforeend', insertHTML);
+// };
+
+// //////////////////////////////////////////////
+
+const addError = function (el) {
+  el.insertAdjacentHTML('beforeend', emptyInputMsg);
+  // emptyInputMsg();
+  const inputField = el.querySelector('.cta-input');
+  inputField.classList.add('error');
+};
+
+const addEmailError = function () {
+  inputEmail.classList.add('error-email');
+  inputEmail.insertAdjacentHTML('afterend', emptyEmailMsg);
+};
+// //////////////////////////////////////////////
 
 const confirmData = btn.addEventListener('click', checkData);
