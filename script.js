@@ -18,8 +18,8 @@ const addError = function (el) {
 };
 
 const addEmailError = function () {
-  inputEmail.classList.add('error-email');
   inputEmail.insertAdjacentHTML('afterend', emptyEmailMsg);
+  inputEmail.classList.add('error-email');
 };
 // //////////////////////////////////////////////
 

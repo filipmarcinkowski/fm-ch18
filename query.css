@@ -1,0 +1,31 @@
+@media (max-width: 56.25em) {
+  .main-container {
+    max-width: 144rem;
+    background: var(--clr-primary);
+    background-image: url(./images/bg-intro-desktop.png);
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+    /* height: 100%; */
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    margin: 100% 2rem;
+  }
+  .heading-part {
+    max-width: 55rem;
+    text-align: center;
+  }
+
+  .heading__heading {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 3.6rem;
+  }
+
+  .baner-box {
+    height: 8rem;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}

@@ -41,17 +41,21 @@ body {
 .main-container {
   max-width: 144rem;
   background: var(--clr-primary);
+  background-image: url(./images/bg-intro-desktop.png);
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: multiply;
+  /* height: auto; */
 }
 
 .grid {
-  /* border: solid 0.2rem red; */
-
   display: grid;
   justify-content: center;
   align-items: center;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  margin: 12rem 16rem;
+
+  margin: 100% 10vw;
 }
 
 /* HEADING PART - LEFT ////////////////////////// */
@@ -72,7 +76,7 @@ body {
 /* FORM PART - RIGHT ////////////////////////////// */
 
 .form-part {
-  /* max-width: 40rem; */
+  max-width: 55rem;
 }
 
 /* baner */
@@ -109,6 +113,10 @@ body {
 
 .input-box {
   position: relative;
+}
+
+.input-box:focus {
+  forced-color-adjust: yellow;
 }
 
 .cta-input {
@@ -173,11 +181,3 @@ body {
   font-size: 1.2rem;
   color: var(--clr-primary);
 }
-
-.hide {
-  display: none;
-}
-
-/* .warning {
-  display: none;
-} */
